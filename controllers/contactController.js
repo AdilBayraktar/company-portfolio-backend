@@ -62,6 +62,39 @@ const sendNewMessage = asyncHandler(async (req, res) => {
     message: req.body.message,
   });
 
+  //Send Email
+  const transporter = Mailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.EMAIL_ACCOUNT,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
+  const mailData = {
+    from: process.env.EMAIL_ACCOUNT,
+    to: process.env.RECEIVERS_LIST,
+    subject: "New Message From Website",
+    html: `
+        <h3>Name: ${req.body.name}</h3>
+        <h3>Email: ${req.body.email}</h3>
+        <h3>Phone: ${req.body.phone_number}</h3>
+        <h1>Message</h3>
+        <h3>${req.body.message}</p>
+    `,
+  };
+
+  transporter.sendMail(mailData, (error, info) => {
+    if (error) {
+      return console.log("Error", error);
+    }
+    res
+      .status(200)
+      .send({ message: "Email Sent Successfully", message_id: info.messageId });
+  });
+
   //Return Response
   res.status(200).json(message);
 });
