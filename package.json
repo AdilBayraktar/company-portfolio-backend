@@ -9,7 +9,7 @@
   },
   "author": "Adil Bayraktar",
   "engines": {
-    "node": "14.17.3"
+    "node": "18.x"
   },
   "license": "ISC",
   "dependencies": {
