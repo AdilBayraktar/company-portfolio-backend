@@ -31,7 +31,7 @@ const getAllServices = asyncHandler(async (req, res) => {
 -------------*/
 
 const getServiceById = asyncHandler(async (req, res) => {
-  const service = await Service.findOne(req.params._id);
+  const service = await Service.findOne({ _id: req.params.id });
   if (!service) {
     return res.status(404).json({ message: "Service not found" });
   }

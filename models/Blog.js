@@ -1,21 +1,19 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
-const TechnologySchema = new mongoose.Schema(
+const BlogSchema = new mongoose.Schema(
   {
     title_ar: {
       type: String,
       required: true,
       trim: true,
-      minlingth: 1,
-      maxlingth: 256,
+      minlingth: 2,
     },
     title_en: {
       type: String,
       required: true,
       trim: true,
-      minlingth: 1,
-      maxlingth: 256,
+      minlingth: 2,
     },
     description_ar: {
       type: String,
@@ -41,30 +39,26 @@ const TechnologySchema = new mongoose.Schema(
 );
 
 //Validate Data
-const validateTechnologyDate = (obj) => {
+const validateBlogData = (obj) => {
   const schema = Joi.object({
-    title_ar: Joi.string().min(1).max(256).trim().required(),
-    title_en: Joi.string().min(1).max(256).trim().required(),
+    title_ar: Joi.string().min(2).max(256).trim().required(),
+    title_en: Joi.string().min(2).max(256).trim().required(),
     description_ar: Joi.string().min(4).trim().required(),
     description_en: Joi.string().min(4).trim().required(),
   });
   return schema.validate(obj);
 };
 
-const validateUpdateTechnologyDate = (obj) => {
+const validateUpdateBlogData = (obj) => {
   const schema = Joi.object({
-    title_ar: Joi.string().min(1).max(256).trim(),
-    title_en: Joi.string().min(1).max(256).trim(),
+    title_ar: Joi.string().min(2).trim(),
+    title_en: Joi.string().min(2).trim(),
     description_ar: Joi.string().min(4).trim(),
     description_en: Joi.string().min(4).trim(),
   });
   return schema.validate(obj);
 };
 
-const Technology = mongoose.model("Technology", TechnologySchema);
+const Blog = mongoose.model("Blog", BlogSchema);
 
-module.exports = {
-  Technology,
-  validateTechnologyDate,
-  validateUpdateTechnologyDate,
-};
+module.exports = { Blog, validateBlogData, validateUpdateBlogData };

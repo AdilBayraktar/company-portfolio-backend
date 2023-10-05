@@ -7,7 +7,7 @@ const ContactSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      min: 1,
+      min: 3,
       max: 99,
     },
     email: {
@@ -36,7 +36,7 @@ const ContactSchema = new mongoose.Schema(
 //Validate Data
 const validateContactData = (obj) => {
   const schema = Joi.object({
-    name: Joi.string().min(1).max(99).trim().required(),
+    name: Joi.string().min(3).max(99).trim().required(),
     email: Joi.string().min(4).trim().email().required(),
     phone_number: Joi.string().min(6).max(20).trim().required(),
     message: Joi.string().min(4).trim().required(),

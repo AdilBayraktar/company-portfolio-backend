@@ -31,7 +31,7 @@ const getAllTech = asyncHandler(async (req, res) => {
 -------------*/
 
 const getTechById = asyncHandler(async (req, res) => {
-  const technology = await Technology.findOne(req.params._id);
+  const technology = await Technology.findOne({ _id: req.params.id });
   if (!technology) {
     return res.status(404).json({ message: "Technology not found" });
   }
@@ -76,6 +76,8 @@ const createNewtech = asyncHandler(async (req, res) => {
   const technology = await Technology.create({
     title_ar: req.body.title_ar,
     title_en: req.body.title_en,
+    description_ar: req.body.description_ar,
+    description_en: req.body.description_en,
     image: {
       url: result.secure_url,
       publicId: result.public_id,
@@ -112,6 +114,8 @@ const updateTech = asyncHandler(async (req, res) => {
       $set: {
         title_ar: req.body.title_ar,
         title_en: req.body.title_en,
+        description_ar: req.body.description_ar,
+        description_en: req.body.description_en,
       },
     },
     { new: true }

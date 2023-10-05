@@ -44,21 +44,15 @@ const ProjectSchema = new mongoose.Schema(
     },
     videoLink: {
       type: String,
-      minlingth: 1,
       trim: true,
-      default: "",
     },
     projectLink: {
       type: String,
-      minlingth: 1,
       trim: true,
-      default: "",
     },
     projectType: {
       type: String,
-      minlingth: 1,
       trim: true,
-      default: "",
     },
   },
   { timestamps: true }
@@ -73,9 +67,9 @@ const validateProjectData = (obj) => {
     description_en: Joi.string().min(4).trim().required(),
     features: Joi.array(),
     technologies: Joi.array(),
-    videoLink: Joi.string().min(1),
-    projectLink: Joi.string().min(1),
-    projectType: Joi.string().min(1),
+    videoLink: Joi.string().allow(""),
+    projectLink: Joi.string().allow(""),
+    projectType: Joi.string().allow(""),
   });
   return schema.validate(obj);
 };
@@ -88,9 +82,9 @@ const validateUpdateProjectData = (obj) => {
     description_en: Joi.string().min(4).trim(),
     features: Joi.array(),
     technologies: Joi.array(),
-    videoLink: Joi.string().min(1),
-    projectLink: Joi.string().min(1),
-    projectType: Joi.string().min(1),
+    videoLink: Joi.string().allow(""),
+    projectLink: Joi.string().allow(""),
+    projectType: Joi.string().allow(""),
   });
   return schema.validate(obj);
 };

@@ -34,7 +34,7 @@ const getMessagesCount = asyncHandler(async (req, res) => {
 -------------*/
 
 const getMessageById = asyncHandler(async (req, res) => {
-  const message = await Contact.findById(req.params.id);
+  const message = await Contact.findById({ _id: req.params.id });
   if (!message) {
     return res.status(404).json({ message: "Message not found" });
   }

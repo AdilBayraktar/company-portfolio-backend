@@ -31,7 +31,7 @@ const getAllFeatures = asyncHandler(async (req, res) => {
 -------------*/
 
 const getFeatureById = asyncHandler(async (req, res) => {
-  const feature = await Features.findOne(req.params._id);
+  const feature = await Features.findOne({ _id: req.params.id });
   if (!feature) {
     return res.status(404).json({ message: "Feature not found" });
   }

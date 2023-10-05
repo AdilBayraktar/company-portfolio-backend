@@ -62,6 +62,7 @@ const loginUserController = asyncHandler(async (req, res) => {
   res.status(200).json({
     id: user._id,
     profileImg: user.profileImg,
+    userName: user.userName,
     token,
   });
 });

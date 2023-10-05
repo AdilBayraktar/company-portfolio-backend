@@ -15,10 +15,11 @@ const app = express();
 connectDB();
 
 // Middlewares
+app.use(cors());
 app.use(
   // Parse data to json format
   express.json({
-    limit: "20kb",
+    limit: "1000kb",
   })
 );
 app.use(helmet()); // Security Headers
@@ -36,7 +37,7 @@ app.use("/api/login", limiter);
 app.use(mongoSanitize());
 
 // Prevent Scripts from requests (XSS) attacks
-app.use(xss());
+// app.use(xss());
 
 // Routes
 app.use("/api/auth", require("./routes/authRoute"));
@@ -46,6 +47,7 @@ app.use("/api/tech", require("./routes/technologyRoute"));
 app.use("/api/features", require("./routes/featuresRoute"));
 app.use("/api/projects", require("./routes/projectRoute"));
 app.use("/api/messages", require("./routes/contactRoute"));
+app.use("/api/blog", require("./routes/blogRoute"));
 
 // Run Server
 const port = process.env.PORT || 8000;

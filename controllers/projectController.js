@@ -31,7 +31,7 @@ const getAllProjects = asyncHandler(async (req, res) => {
   -------------*/
 
 const getProjectById = asyncHandler(async (req, res) => {
-  const project = await Project.findOne(req.params._id);
+  const project = await Project.findOne({ _id: req.params.id });
   if (!project) {
     return res.status(404).json({ message: "Project not found" });
   }
