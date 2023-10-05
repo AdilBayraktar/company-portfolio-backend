@@ -19,6 +19,7 @@ router.get("/:id", getServiceById);
 router.put("/:id", verifyToken, updateService);
 router.put(
   "/update-image/:id",
+  //
   verifyToken,
   imageUpload.single("image"),
   updateServiceImage
